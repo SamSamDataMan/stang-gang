@@ -65,7 +65,9 @@ songs = {
 }
 
 # Step 2: Create dropdown
-selected_song = st.selectbox("Choose a song", random.shuffle(list(songs.keys())))
+song_list = list(songs.keys())
+random.shuffle(song_list)
+selected_song = st.selectbox("Choose a song", song_list)
 
 # Step 3: Show Spotify player for the selected song
 spotify_embed_url = songs[selected_song]

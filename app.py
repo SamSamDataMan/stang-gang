@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
 
-df = pd.read_excel("Data.xlsx")
+df = pd.read_excel("Data.xlsx", usecols=["Date", "Fancy App", "The Micros"])
 df["Date"] = pd.to_datetime(df["Date"])
 
 # Create a display-only version with date stripped

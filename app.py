@@ -58,6 +58,9 @@ songs = {
     "Gimme the Loot — The Notorious B.I.G.": "https://open.spotify.com/embed/track/1xIxMz1sNQ4b6svH1GuTtF",
     "Maybach Music 2 — Rick Ross": "https://open.spotify.com/embed/track/1PSOEWhJXNJ0NpjgedMqZ6",
     "Gazillion Ear — MF DOOM": "https://open.spotify.com/embed/track/5KeW2rotY0Gdsml5RPOBN8",
+    "Beautiful Life - Shawn Anthony": "https://open.spotify.com/embed/track/3IgOUvG0HOn2gAscvGffTP",
+    "Rick Ross - The Boss": "https://open.spotify.com/embed/track/67LLvp5hpAtJRZQa7frobT",
+    "Rick Ross - Hustlin'": "https://open.spotify.com/embed/track/3hQCHzkE5oSA3F1xM8bpcM",
 }
 
 # Step 2: Create dropdown

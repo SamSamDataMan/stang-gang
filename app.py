@@ -16,7 +16,7 @@ st.sidebar.write("### Data Table")
 st.sidebar.dataframe(df_display, use_container_width=True, hide_index=True)
 
 # --- MAIN PAGE ---
-df_plot = df.set_index("Date")
+df_plot = df.set_index("Date").sort_index()
 
 # Compute min/max across all numeric columns
 y_min = df_plot.min().min()

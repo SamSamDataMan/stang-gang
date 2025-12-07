@@ -1,3 +1,4 @@
+import random
 from matplotlib import pyplot as plt
 import matplotlib.dates as mdates
 import pandas as pd
@@ -64,7 +65,7 @@ songs = {
 }
 
 # Step 2: Create dropdown
-selected_song = st.selectbox("Choose a song", list(songs.keys()))
+selected_song = st.selectbox("Choose a song", random.shuffle(list(songs.keys())))
 
 # Step 3: Show Spotify player for the selected song
 spotify_embed_url = songs[selected_song]

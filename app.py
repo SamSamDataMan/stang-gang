@@ -64,11 +64,15 @@ songs = {
     "Rick Ross - Hustlin'": "https://open.spotify.com/embed/track/3hQCHzkE5oSA3F1xM8bpcM",
 }
 
-# Step 2: Create dropdown
-song_list = list(songs.keys())
-random.shuffle(song_list)
+# Shuffle only once per session
+if "shuffled_songs" not in st.session_state:
+    st.session_state.shuffled_songs = list(songs.keys())
+    random.shuffle(st.session_state.shuffled_songs)
+
+# Use the stable shuffled list
+song_list = st.session_state.shuffled_songs
+
 selected_song = st.selectbox("Choose a song", song_list)
 
-# Step 3: Show Spotify player for the selected song
-spotify_embed_url = songs[selected_song]
-components.iframe(spotify_embed_url, width=300, height=80)
+# Play the correct URL
+components.iframe(songs[selected_song], width=300, height=80)

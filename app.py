@@ -54,14 +54,15 @@ st.pyplot(fig)
 spotify_embed_url = "https://open.spotify.com/embed/track/563vSy3HB5NHxel1VGQCW6"
 
 songs = {
-    "Still Fly — Big Tymers": "https://open.spotify.com/embed/track/563vSy3HB5NHxel1VGQCW6",
-    "Rack City — Tyga": "https://open.spotify.com/embed/track/0srwKuJPH8yBzzFUJMBQM2",
-    "Gimme the Loot — The Notorious B.I.G.": "https://open.spotify.com/embed/track/1xIxMz1sNQ4b6svH1GuTtF",
-    "Maybach Music 2 — Rick Ross": "https://open.spotify.com/embed/track/1PSOEWhJXNJ0NpjgedMqZ6",
-    "Gazillion Ear — MF DOOM": "https://open.spotify.com/embed/track/5KeW2rotY0Gdsml5RPOBN8",
-    "Beautiful Life - Shawn Anthony": "https://open.spotify.com/embed/track/3IgOUvG0HOn2gAscvGffTP",
-    "Rick Ross - The Boss": "https://open.spotify.com/embed/track/67LLvp5hpAtJRZQa7frobT",
-    "Rick Ross - Hustlin'": "https://open.spotify.com/embed/track/3hQCHzkE5oSA3F1xM8bpcM",
+    # "Still Fly — Big Tymers": "https://open.spotify.com/embed/track/563vSy3HB5NHxel1VGQCW6",
+    # "Rack City — Tyga": "https://open.spotify.com/embed/track/0srwKuJPH8yBzzFUJMBQM2",
+    # "Gimme the Loot — The Notorious B.I.G.": "https://open.spotify.com/embed/track/1xIxMz1sNQ4b6svH1GuTtF",
+    # "Maybach Music 2 — Rick Ross": "https://open.spotify.com/embed/track/1PSOEWhJXNJ0NpjgedMqZ6",
+    # "Gazillion Ear — MF DOOM": "https://open.spotify.com/embed/track/5KeW2rotY0Gdsml5RPOBN8",
+    # "Beautiful Life - Shawn Anthony": "https://open.spotify.com/embed/track/3IgOUvG0HOn2gAscvGffTP",
+    # "Rick Ross - The Boss": "https://open.spotify.com/embed/track/67LLvp5hpAtJRZQa7frobT",
+    # "Rick Ross - Hustlin'": "https://open.spotify.com/embed/track/3hQCHzkE5oSA3F1xM8bpcM",
+    'Jay-Z - Allure':'https://open.spotify.com/embed/track/6Sgm6qofFJPJG1A06mzDIb?si=hNi_yqzXRD6zykfUd5Ejcg'
 }
 
 # Shuffle only once per session

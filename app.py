@@ -33,8 +33,28 @@ fig, ax = plt.subplots(figsize=(8, 4))
 
 plt.title("Software Development vs Unbridled Degeneracy")
 
+color_map = {
+    "The Micros": "#2E7D32",  # money green
+    "Fancy App": "#0B1F5E",   # dark blue
+}
+
 for column in df_plot.columns:
-    ax.plot(df_plot.index, df_plot[column], marker="o", label=column)
+    series = df_plot[column]
+    color = color_map.get(column)
+    # Draw a continuous line by forward-filling gaps
+    line_series = series.ffill()
+    ax.plot(df_plot.index, line_series, marker=None, label=column, color=color)
+
+    # Only show markers when the value changes (and exists)
+    change_mask = series.notna() & (series != series.shift())
+    ax.plot(
+        df_plot.index[change_mask],
+        series[change_mask],
+        linestyle="None",
+        marker="o",
+        color=color,
+        label="_nolegend_"
+    )
 
 # Rotate x-axis labels and set smaller font
 ax.tick_params(axis="x", rotation=45, labelsize=8)

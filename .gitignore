@@ -1,0 +1,4 @@
+streamlit.err.log
+streamlit.out.log
+__pycache__/
+*.py[cod]

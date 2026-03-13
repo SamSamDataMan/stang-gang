@@ -1,9 +1,10 @@
 import random
-from matplotlib import pyplot as plt
-import matplotlib.dates as mdates
 import pandas as pd
+import plotly.graph_objects as go
 import streamlit as st
 import streamlit.components.v1 as components
+
+st.set_page_config(layout="wide")
 
 df = pd.read_excel("Data.xlsx", usecols=["Date", "Fancy App", "The Micros"])
 df["Date"] = pd.to_datetime(df["Date"])
@@ -28,10 +29,37 @@ padding = 0.10 * (y_max - y_min if y_max != y_min else max(abs(y_max), 1))
 lower = y_min - padding
 upper = y_max + padding
 
-# Make the plot
-fig, ax = plt.subplots(figsize=(8, 4))
 
-plt.title("Software Development vs Unbridled Degeneracy")
+def hex_to_rgb(color_value):
+    color_value = (color_value or "").lstrip("#")
+    if len(color_value) != 6:
+        return (15, 23, 42)
+    return tuple(int(color_value[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def rgba(color_value, alpha):
+    red, green, blue = hex_to_rgb(color_value)
+    return f"rgba({red}, {green}, {blue}, {alpha})"
+
+
+theme_base = st.get_option("theme.base") or "light"
+is_dark_mode = theme_base == "dark"
+theme_background = st.get_option("theme.backgroundColor") or ("#0E1117" if is_dark_mode else "#FFFFFF")
+theme_text = st.get_option("theme.textColor") or ("#F9FAFB" if is_dark_mode else "#111827")
+
+chart_colors = {
+    "paper_bg": rgba(theme_background, 0),
+    "plot_bg": "rgba(198, 205, 214, 0.18)" if is_dark_mode else "rgba(215, 221, 228, 0.82)",
+    "grid": rgba(theme_text, 0.12 if is_dark_mode else 0.14),
+    "zero": rgba(theme_text, 0.22 if is_dark_mode else 0.24),
+    "text": theme_text,
+    "hover_bg": "rgba(31, 41, 55, 0.96)" if is_dark_mode else "rgba(255, 255, 255, 0.98)",
+    "border": rgba(theme_text, 0.22),
+    "axis": rgba(theme_text, 0.32),
+}
+
+# Make the plot
+fig = go.Figure()
 
 color_map = {
     "The Micros": "#2E7D32",  # money green
@@ -41,34 +69,98 @@ color_map = {
 for column in df_plot.columns:
     series = df_plot[column]
     color = color_map.get(column)
+
     # Draw a continuous line by forward-filling gaps
     line_series = series.ffill()
-    ax.plot(df_plot.index, line_series, marker=None, label=column, color=color)
+    fig.add_trace(
+        go.Scatter(
+            x=df_plot.index,
+            y=line_series,
+            mode="lines",
+            name=column,
+            line={"color": color, "width": 3},
+            hoverinfo="skip",
+        )
+    )
 
     # Only show markers when the value changes (and exists)
     change_mask = series.notna() & (series != series.shift())
-    ax.plot(
-        df_plot.index[change_mask],
-        series[change_mask],
-        linestyle="None",
-        marker="o",
-        color=color,
-        label="_nolegend_"
+    fig.add_trace(
+        go.Scatter(
+            x=df_plot.index[change_mask],
+            y=series[change_mask],
+            mode="markers",
+            marker={"color": color, "size": 9},
+            name=column,
+            showlegend=False,
+            customdata=[column] * int(change_mask.sum()),
+            hovertemplate=(
+                "%{customdata}<br>"
+                "Date: %{x|%m/%d/%y}<br>"
+                "Value: $%{y:,.0f}"
+                "<extra></extra>"
+            ),
+        )
     )
 
-# Rotate x-axis labels and set smaller font
-ax.tick_params(axis="x", rotation=45, labelsize=8)
+fig.update_layout(
+    title={
+        "text": "<b>Software Development vs Unbridled Degeneracy</b>",
+        "x": 0.5,
+        "xanchor": "center",
+        "font": {"size": 24},
+    },
+    xaxis_title="<b>Date</b>",
+    yaxis_title="<b>Gleanings ($)</b>",
+    yaxis={"range": [lower, upper], "tickformat": "$,.0f"},
+    xaxis={"tickformat": "%m/%d/%y"},
+    hovermode="closest",
+    paper_bgcolor=chart_colors["paper_bg"],
+    plot_bgcolor=chart_colors["plot_bg"],
+    font={"color": chart_colors["text"], "size": 14},
+    hoverlabel={
+        "bgcolor": chart_colors["hover_bg"],
+        "bordercolor": chart_colors["border"],
+        "font": {"color": chart_colors["text"], "size": 14},
+    },
+    legend_title_text="",
+    legend={
+        "bgcolor": "rgba(0, 0, 0, 0)",
+        "bordercolor": "rgba(0, 0, 0, 0)",
+        "orientation": "h",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 1.03,
+        "yanchor": "bottom",
+        "font": {"size": 13},
+    },
+    margin={"l": 72, "r": 40, "t": 110, "b": 72},
+)
 
-# Format dates as mm/dd/yy
-ax.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d/%y"))
+fig.update_xaxes(
+    showgrid=True,
+    gridcolor=chart_colors["grid"],
+    zeroline=False,
+    showline=True,
+    linecolor=chart_colors["axis"],
+    linewidth=1.5,
+    tickfont={"size": 13},
+    title_font={"size": 17},
+)
 
-ax.set_ylim(lower, upper)
-ax.set_xlabel("Date")
-ax.set_ylabel("Gleanings ($)")
-ax.legend()
-ax.grid(True, alpha=0.3)
+fig.update_yaxes(
+    showgrid=True,
+    gridcolor=chart_colors["grid"],
+    zeroline=True,
+    zerolinecolor=chart_colors["zero"],
+    showline=True,
+    linecolor=chart_colors["axis"],
+    linewidth=1.5,
+    tickfont={"size": 13},
+    title_font={"size": 17},
+)
 
-st.pyplot(fig)
+st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
 # Spotify embed link (user has to click Play)
 spotify_embed_url = "https://open.spotify.com/embed/track/563vSy3HB5NHxel1VGQCW6"
@@ -82,7 +174,8 @@ songs = {
     # "Beautiful Life - Shawn Anthony": "https://open.spotify.com/embed/track/3IgOUvG0HOn2gAscvGffTP",
     # "Rick Ross - The Boss": "https://open.spotify.com/embed/track/67LLvp5hpAtJRZQa7frobT",
     # "Rick Ross - Hustlin'": "https://open.spotify.com/embed/track/3hQCHzkE5oSA3F1xM8bpcM",
-    'Jay-Z - Allure':'https://open.spotify.com/embed/track/6Sgm6qofFJPJG1A06mzDIb?si=hNi_yqzXRD6zykfUd5Ejcg'
+    # 'Jay-Z - Allure':'https://open.spotify.com/embed/track/6Sgm6qofFJPJG1A06mzDIb?si=hNi_yqzXRD6zykfUd5Ejcg',
+    'Marcy Playground - Sex and Candy': 'https://open.spotify.com/embed/track/5mkGfmJGFZpwK9nA5amOhv'
 }
 
 # Shuffle only once per session

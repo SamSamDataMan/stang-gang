@@ -175,7 +175,8 @@ songs = {
     # "Rick Ross - The Boss": "https://open.spotify.com/embed/track/67LLvp5hpAtJRZQa7frobT",
     # "Rick Ross - Hustlin'": "https://open.spotify.com/embed/track/3hQCHzkE5oSA3F1xM8bpcM",
     # 'Jay-Z - Allure':'https://open.spotify.com/embed/track/6Sgm6qofFJPJG1A06mzDIb?si=hNi_yqzXRD6zykfUd5Ejcg',
-    'Marcy Playground - Sex and Candy': 'https://open.spotify.com/embed/track/5mkGfmJGFZpwK9nA5amOhv'
+    # 'Marcy Playground - Sex and Candy': 'https://open.spotify.com/embed/track/5mkGfmJGFZpwK9nA5amOhv',
+    'De La Soul - Stakes is High': 'https://open.spotify.com/embed/track/22wlZ0k1c3BSZuZpHkqAnl?si=1be81327c3664146'
 }
 
 # Shuffle only once per session

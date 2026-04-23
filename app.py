@@ -176,7 +176,8 @@ songs = {
     # "Rick Ross - Hustlin'": "https://open.spotify.com/embed/track/3hQCHzkE5oSA3F1xM8bpcM",
     # 'Jay-Z - Allure':'https://open.spotify.com/embed/track/6Sgm6qofFJPJG1A06mzDIb?si=hNi_yqzXRD6zykfUd5Ejcg',
     # 'Marcy Playground - Sex and Candy': 'https://open.spotify.com/embed/track/5mkGfmJGFZpwK9nA5amOhv',
-    'De La Soul - The Bizness': 'https://open.spotify.com/embed/track/22wlZ0k1c3BSZuZpHkqAnl?si=1be81327c3664146'
+    # 'De La Soul - The Bizness': 'https://open.spotify.com/embed/track/22wlZ0k1c3BSZuZpHkqAnl?si=1be81327c3664146',
+    'Fall Out Boy - Sophomore Slump Or Comeback Of The Year': 'https://open.spotify.com/embed/track/1iir1dMidSGRzbPMCCEtfX?si=bdc41c5d60bf4c7e'
 }
 
 # Shuffle only once per session

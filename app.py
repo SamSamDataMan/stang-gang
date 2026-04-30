@@ -177,7 +177,8 @@ songs = {
     # 'Jay-Z - Allure':'https://open.spotify.com/embed/track/6Sgm6qofFJPJG1A06mzDIb?si=hNi_yqzXRD6zykfUd5Ejcg',
     # 'Marcy Playground - Sex and Candy': 'https://open.spotify.com/embed/track/5mkGfmJGFZpwK9nA5amOhv',
     # 'De La Soul - The Bizness': 'https://open.spotify.com/embed/track/22wlZ0k1c3BSZuZpHkqAnl?si=1be81327c3664146',
-    'Fall Out Boy - Sophomore Slump Or Comeback Of The Year': 'https://open.spotify.com/embed/track/1iir1dMidSGRzbPMCCEtfX?si=bdc41c5d60bf4c7e'
+    # 'Fall Out Boy - Sophomore Slump Or Comeback Of The Year': 'https://open.spotify.com/embed/track/1iir1dMidSGRzbPMCCEtfX?si=bdc41c5d60bf4c7e',
+    'Jake One ft. MF DOOM - Trap Door': 'https://open.spotify.com/embed/track/1nDtalylEkGczhTLJ2rOPH?si=7b1b19d8fbd2430f'
 }
 
 # Shuffle only once per session
